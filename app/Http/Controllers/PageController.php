@@ -8,4 +8,9 @@ class PageController extends Controller
     {
         return view('home');
     }
+
+    public function api_articles()
+    {
+        return view('spa.articles');
+    }
 }

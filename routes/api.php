@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+use App\Tag;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +16,13 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('articles', 'API\ArticleController@expose');
+Route::get('tags', function () {
+    return response()->json([
+        'response' => Tag::all(),
+    ]);
+});
+Route::get('categories', function () {
+    return response()->json([
+        'response' => Category::all(),
+    ]);
+});

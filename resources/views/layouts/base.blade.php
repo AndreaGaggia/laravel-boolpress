@@ -17,6 +17,8 @@
             <a href="{{ route('api_articles') }}"
                 class="btn {{ Route::is('api_articles') ? 'btn-outline-danger' : '' }}">Vue articles</a>
             <a href="/api/articles" class="btn">articles API</a>
+            <a href="/api/categories" class="btn">categories API</a>
+            <a href="/api/tags" class="btn">tags API</a>
         </nav>
     </header>
     <main class="p-4">

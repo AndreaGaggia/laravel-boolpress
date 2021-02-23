@@ -15,9 +15,17 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+export default {
+    data() {
+        return {
+            posts: []
+        };
+    },
+    mounted() {
+        console.log("Component mounted.");
+        axios.get("api/articles").then(response => {
+            console.log(response);
+        });
     }
+};
 </script>

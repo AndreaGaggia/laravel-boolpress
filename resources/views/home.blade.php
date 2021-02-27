@@ -1,5 +1,5 @@
 @extends('layouts.base')
 
 @section('main')
-    home
+    <h1>home</h1>
 @endsection

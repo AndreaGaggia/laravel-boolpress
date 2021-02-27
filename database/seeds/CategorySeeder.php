@@ -30,8 +30,8 @@ class CategorySeeder extends Seeder
                 'description' => 'Everything and more about Machine Learning!',
             ],
             [
-                'name' => 'Clous Computing',
-                'description' => 'Everything and more about Clous Computing!',
+                'name' => 'Cloud Computing',
+                'description' => 'Everything and more about Cloud Computing!',
             ],
             [
                 'name' => 'Design',

@@ -13,4 +13,14 @@ class PageController extends Controller
     {
         return view('spa.articles');
     }
+
+    public function api_categories()
+    {
+        return view('spa.categories');
+    }
+
+    public function api_tags()
+    {
+        return view('spa.tags');
+    }
 }

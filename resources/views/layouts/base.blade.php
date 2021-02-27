@@ -14,11 +14,12 @@
         <h1 class="text-uppercase display-4 text-center font-weight-bold">boolpress</h1>
         <nav class="d-flex justify-content-around border border-dark border-right-0 border-left-0 p-2">
             <a href="/" class="btn {{ Route::is('home') ? 'btn-outline-danger' : '' }}">Home</a>
+            <a href="/articles" class="btn {{ Route::is('articles.index') ? 'btn-outline-danger' : '' }}">Index</a>
             <a href="{{ route('api_articles') }}"
                 class="btn {{ Route::is('api_articles') ? 'btn-outline-danger' : '' }}">Vue articles</a>
-            <a href="/api/articles" class="btn">articles API</a>
+            {{-- <a href="/api/articles" class="btn">articles API</a>
             <a href="/api/categories" class="btn">categories API</a>
-            <a href="/api/tags" class="btn">tags API</a>
+            <a href="/api/tags" class="btn">tags API</a> --}}
         </nav>
     </header>
     <main class="p-4">

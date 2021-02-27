@@ -14,4 +14,8 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', 'PageController@home')->name('home');
-Route::get('articles', 'PageController@api_articles')->name('api_articles');
+Route::get('articlesV', 'PageController@api_articles')->name('api_articles');
+Route::get('categories', 'PageController@api_categories')->name('api_categories');
+Route::get('tags', 'PageController@api_tags')->name('api_tags');
+
+Route::resource('articles', 'ArticleController');

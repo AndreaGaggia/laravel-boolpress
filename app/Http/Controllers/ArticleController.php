@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::latest()->get();
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('articles.create', compact('categories'));
     }
 
     /**
@@ -35,7 +39,23 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'author' => 'required',
+            'published_at' => 'required',
+            'cat_id' => 'required',
+        ]);
+
+        Article::create($validated);
+
+        // $article = new Article();
+        // $article->title = request('title');
+        // $article->body = request('body');
+        // $article->author = request('author');
+        // $article->save();
+
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -46,7 +66,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -57,7 +77,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -69,7 +89,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->update($request->all());
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -80,6 +101,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 }

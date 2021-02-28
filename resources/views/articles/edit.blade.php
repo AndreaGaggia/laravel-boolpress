@@ -23,6 +23,25 @@
             <input class="form-control" type="date" name="published_at" id="published_at"
                 value="{{ $article->published_at }}">
         </div>
+        <div class="form-group">
+            <label for="cat_id">Categoria</label>
+            <select class="form-control" name="cat_id" id="cat_id">
+                @foreach ($categories as $cat)
+                    <option value="{{ $cat->id }}" {{ $cat->id === $article->cat_id ? 'selected' : '' }}>
+                        {{ $cat->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <small class="form-text text-muted">Selezione multipla consentita</small>
+            <select class="form-control" name="tags[]" id="tags" multiple>
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}" {{ $article->tags->contains($tag) ? 'selected' : '' }}>
+                        {{ $tag->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-danger">Modifica</button>
     </form>
 @endsection

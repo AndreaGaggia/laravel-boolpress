@@ -2,16 +2,17 @@
 
 @section('main')
     <div class="mb-2">
-        <a href="{{ route('articles.create') }}" class="btn btn-lg btn-warning">Create a new article</a>
+        <a href="{{ route('articles.create') }}" class="btn btn-lg btn-warning border border-dark">Create a new
+            article</a>
     </div>
-    <table class="table">
+    <table class="table table-hover table-borderless table-responsive shadow-sm">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">title</th>
                 <th scope="col">body</th>
                 <th scope="col">author</th>
-                <th scope="col">pub date</th>
+                <th scope="col" style="width: 120px">pub date</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,7 +24,7 @@
                     <td>{{ $article->body }}</td>
                     <td>{{ $article->author }}</td>
                     <td>{{ $article->published_at }}</td>
-                    <td class="d-flex flex-column">
+                    <td class="d-flex flex-column text-uppercase">
                         <a href="{{ route('articles.show', ['article' => $article->id]) }}"
                             class="text-secondary">show</a>
                         <a href="{{ route('articles.edit', ['article' => $article->id]) }}" class="text-primary">edit</a>
@@ -31,7 +32,6 @@
                         <a class="text-danger" data-toggle="modal" data-target="#delete-{{ $article->id }}" role="button">
                             delete
                         </a>
-
                         <!-- Modal -->
                         <div class="modal fade" id="delete-{{ $article->id }}" tabindex="-1" role="dialog">
                             <div class="modal-dialog modal-dialog-centered" role="document">

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
-use GuzzleHttp\Promise\Create;
+use App\Tag;
+// use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -28,7 +29,8 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('articles.create', compact('categories'));
+        $tags = Tag::all();
+        return view('articles.create', compact('categories', 'tags'));
     }
 
     /**
@@ -39,23 +41,23 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->tags);
+
         $validated = $request->validate([
             'title' => 'required',
             'body' => 'required',
             'author' => 'required',
             'published_at' => 'required',
-            'cat_id' => 'required',
+            'cat_id' => 'exists:categories,id',
+            'tags' => 'exists:tags,id',
         ]);
 
         Article::create($validated);
 
-        // $article = new Article();
-        // $article->title = request('title');
-        // $article->body = request('body');
-        // $article->author = request('author');
-        // $article->save();
+        $last_article = Article::orderBy('id', 'desc')->first();
+        $last_article->tags()->attach($request->tags);
 
-        return redirect()->route('articles.index');
+        return redirect()->route('articles.show', $last_article);
     }
 
     /**
@@ -77,7 +79,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -89,7 +93,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update($request->all());
+        //dd($request->all());
+
+        //validation
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'author' => 'required',
+            'published_at' => 'required',
+            'cat_id' => 'exists:categories,id',
+            'tags' => 'exists:tags,id',
+        ]);
+
+        $article->update($validated);
+        $article->tags()->sync($request->tags);
         return redirect()->route('articles.index');
     }
 
